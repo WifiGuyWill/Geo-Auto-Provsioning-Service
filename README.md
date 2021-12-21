@@ -12,3 +12,5 @@ Geo-IP auto provisioning service (GAPS) will auto assign any new AP to a group i
 * The details are parsed for the public IP. GAPS makes an API call to a public GEO IP service which return the physical location of the installed AP. 
 * The location data parsed for the two letter state. This is checked against a local dictionary that maps the state to a location (IE East / West). 
 * Based on the location, a group is selected and GAPS sends Central the AP provisioning command with the proper group.
+
+#Install instructions coming soon
