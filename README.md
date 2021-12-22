@@ -16,12 +16,12 @@ Geo-IP auto provisioning service (GAPS) will auto assign any new AP to a group i
 #Install instructions
 * Copy the files to host
 * Open dockerfile and add the Aruba Central Credentials
-** ENV USERNAME=xxxxxxxxxx@email.com
-** ENV PASSWORD=xxxxxxxxxx
-** ENV CLIENT_ID=xxxxxxxxxx
-** ENV CLIENT_SECRET=xxxxxxxxxx
-** ENV CUSTOMER_ID=xxxxxxxxxx
-** ENV BASE_URL=https://apigw-prod2.central.arubanetworks.com
-** ENV WEBHOOK_TOKEN=xxxxxxxxxx   
+> ENV USERNAME=xxxxxxxxxx@email.com
+> ENV PASSWORD=xxxxxxxxxx
+> ENV CLIENT_ID=xxxxxxxxxx
+> ENV CLIENT_SECRET=xxxxxxxxxx
+> ENV CUSTOMER_ID=xxxxxxxxxx
+> ENV BASE_URL=https://apigw-prod2.central.arubanetworks.com
+> ENV WEBHOOK_TOKEN=xxxxxxxxxx   
 * Create the container "docker build -t gaps:latest ."
 * Start the container "docker run -p 5000:5000 gaps"
