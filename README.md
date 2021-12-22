@@ -5,7 +5,7 @@ A service to auto provision devices in Aruba Central based on the Geo-IP locatio
 
 Geo-IP auto provisioning service (GAPS) will auto assign any new AP to a group in Central based on the location of the device.
 
-# How it works:
+# How It Works:
 
 * New AP is plugged in and automatically connects to Aruba Central. 
 * Central via webhook posts a message to GAPS which then does a REST API call to Central for AP details. 
@@ -22,7 +22,7 @@ Geo-IP auto provisioning service (GAPS) will auto assign any new AP to a group i
    * Global > Alerts & Events > Config
    * Under Access Point > Enable AP Detect > Select the Webhook for GAPS
 
-# Install instructions:
+# Install Instructions:
 
   1. Copy the files to host
   2. Open location_mapping.py
