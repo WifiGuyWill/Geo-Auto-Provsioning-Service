@@ -1,7 +1,7 @@
 # Location Based Provisioning Service for Aruba Central
 A service to auto provision devices in Aruba Central based on the Geo-IP location
 
-![GAPS](https://github.com/WifiGuyWill/Geo-Auto-Provsioning-Service/blob/main/GAPS.jpg?raw=true "GAPS")
+![GAPS](https://github.com/WifiGuyWill/Geo-Auto-Provsioning-Service/blob/GAPS-Container/img/GAPS.jpg?raw=true "GAPS")
 
 Geo-IP auto provisioning service (GAPS) will auto assign any new AP to a group in Central based on the location of the device.
 
