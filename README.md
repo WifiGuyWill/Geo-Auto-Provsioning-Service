@@ -8,10 +8,10 @@ Geo-IP auto provisioning service (GAPS) will auto assign any new AP to a group i
 # How it works:
 
 * New AP is plugged in and automatically connects to Aruba Central. 
-* Central via webhook posts a message to GAPS which then does a REST API call to central for AP details. 
+* Central via webhook posts a message to GAPS which then does a REST API call to Central for AP details. 
 * The details are parsed for the public IP. GAPS makes an API call to a public GEO IP service which return the physical location of the installed AP. 
-* The location data parsed for the two letter state. This is checked against a local dictionary that maps the state to a location (IE East / West). 
-* Based on the location, a group is selected and GAPS sends Central the AP provisioning command with the proper group.
+* The location data parsed for the two letter state code. This is checked against a local dictionary that maps the state to a group in Cental (IE East-Group / West-Group). 
+* GAPS then sends the group info to Central and provisions the AP into the proper group.
 
 # First Steps:
 
