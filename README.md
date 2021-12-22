@@ -13,11 +13,22 @@ Geo-IP auto provisioning service (GAPS) will auto assign any new AP to a group i
 * The location data parsed for the two letter state. This is checked against a local dictionary that maps the state to a location (IE East / West). 
 * Based on the location, a group is selected and GAPS sends Central the AP provisioning command with the proper group.
 
-# Install instructions
+# First Steps:
+
+* Log into Aruba Central from the Account Home page:
+  * API Gateway > System Apps & Tokens > Create a new key
+  * Webhooks > Click the + sign > Enter the URL where the GAPS service will be posted "https://<gaps-url>/webhook
+* Launch the Network Dashboard:
+   * Global > Alerts & Events > Config
+   * Under Access Point > Enable AP Detect > Select the Webhook for GAPS
+
+# Install instructions:
 
   1. Copy the files to host
-
-  3. Open dockerfile and add the Aruba Central Credentials
+  2. Open location_mapping.py
+     * Match the two letter state code to the Central Group  
+     * Add a Group for the default for any Geo-IP locations that don't match 
+  4. Open dockerfile and add the Aruba Central Credentials
 
     > ENV USERNAME=xxxxxxxxxx@email.com
     > ENV PASSWORD=xxxxxxxxxx
@@ -26,8 +37,7 @@ Geo-IP auto provisioning service (GAPS) will auto assign any new AP to a group i
     > ENV CUSTOMER_ID=xxxxxxxxxx
     > ENV BASE_URL=https://apigw-prod2.central.arubanetworks.com
     > ENV WEBHOOK_TOKEN=xxxxxxxxxx
-  3. Create the container "docker build -t gaps:latest ."
-
+  4. Create the container "docker build -t gaps:latest ."
   5. Start the container "docker run -p 5000:5000 gaps"
   
 - - - -
