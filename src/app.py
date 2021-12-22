@@ -1,41 +1,47 @@
 #!/usr/bin/python3
 #(c) 2021 Will Smith - WILL@WIFI-GUYS.COM
 
+import os, sys
+currentdir = os.path.dirname(os.path.realpath(__file__))
+parentdir = os.path.dirname(currentdir)
+sys.path.append(parentdir)
+
 from flask import Flask, request, abort
 from pycentral.base import ArubaCentralBase
 import json
-import creds
 import urllib.request
 import base64
 import hashlib
 import hmac
+import location_mapping
 
 # Dict to map state to East or West
-location = {"MI":"EAST", "IN":"EAST", "KY":"EAST", "TN":"EAST", "AL":"EAST", "OH":"EAST", 
-            "GA":"EAST", "FL":"EAST", "SC":"EAST", "NC":"EAST", "VA":"EAST", "WV":"EAST", 
-            "DE":"EAST", "MD":"EAST", "NJ":"EAST", "PA":"EAST", "NY":"EAST", "CT":"EAST", 
-            "RI":"EAST", "MA":"EAST", "VT":"EAST", "NH":"EAST", "ME":"EAST", "LA":"EAST", 
-            "WI":"EAST", "IL":"EAST", "MS":"EAST", "MN":"EAST", "IA":"EAST", "MO":"EAST", 
-            "AR":"EAST", "CA":"WEST", "OR":"WEST", "WA":"WEST", "NV":"WEST", "ID":"WEST", 
-            "UT":"WEST", "AZ":"WEST", "MT":"WEST", "AK":"WEST", "HW":"WEST", "WY":"WEST", 
-            "CO":"WEST", "NM":"WEST", "ND":"WEST", "SD":"WEST", "NE":"WEST", "KS":"WEST", 
-            "OK":"WEST", "TX":"WEST", "HI":"WEST"}
+location = location_mapping.location
+default_group = location_mapping.default_group
+
+central_info = {
+    "username": os.getenv('USERNAME'),
+    "password": os.getenv('PASSWORD'),
+    "client_id": os.getenv('CLIENT_ID'),
+    "client_secret": os.getenv('CLIENT_SECRET'),
+    "customer_id": os.getenv('CUSTOMER_ID'),
+    "base_url": os.getenv('BASE_URL')
+    }
+
+token_id = os.getenv('WEBHOOK_TOKEN')
 
 # Variables
-central_info = creds.central_info
-webhooktoken = creds.webhook
 ssl_verify = True
 central = ArubaCentralBase(central_info=central_info, ssl_verify=ssl_verify)
 geoipurl = "http://ip-api.com/json/"
 
 app = Flask(__name__)
-#app.secret_key = 'S3cretK3y3'
+app.secret_key = 'S3cretK3y3'
 
 # Validate message integrity
 def verifyHeaderAuth(fullheaders, webhookData):
     # Token obtained from Aruba Central Webhooks page as provided in the input
-    token = json.dumps((webhooktoken)["token"]).strip('"')
-    token = token.encode('utf-8')
+    token = token_id.encode('utf-8')
 
     # Capture data - needs cleanup
     data = webhookData.decode('utf-8')
@@ -88,15 +94,10 @@ def webhook():
             print(state)
 
             # Determine the group based on state
-            region = location[state]
-            print(region)
-            if region == "WEST":
-                centralgroup = "WEST-AP-GROUP"
-            if region == "EAST":
-                centralgroup = "EAST-AP-GROUP"
+            if location.get(state) is not None:
+                centralgroup = default_group
             else:
-                centralgroup == "default"
-            print(centralgroup)
+                centralgroup = location[state]
 
             # Move AP into group based on State
             apmove = central.command(apiMethod="POST", apiPath="/configuration/v1/devices/move", 

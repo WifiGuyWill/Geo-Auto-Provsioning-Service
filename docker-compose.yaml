@@ -1,0 +1,6 @@
+version: "3.3"
+services:
+  gaps:
+    image: gaps:latest
+    ports:
+      - "5000:5000"
