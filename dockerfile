@@ -1,5 +1,6 @@
 FROM python:alpine3.7
-COPY . /app
+COPY ./src /app/src
+COPY location_mapping.py /app
 WORKDIR /app/src
 RUN pip install -r requirements.txt
 EXPOSE 5000
