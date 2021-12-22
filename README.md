@@ -5,7 +5,7 @@ A service to auto provision devices in Aruba Central based on the Geo-IP locatio
 
 Geo-IP auto provisioning service (GAPS) will auto assign any new AP to a group in Central based on the location of the device.
 
-#How it works:
+# How it works:
 
 * New AP is plugged in and automatically connects to Aruba Central. 
 * Central via webhook posts a message to GAPS which then does a REST API call to central for AP details. 
@@ -34,4 +34,9 @@ Geo-IP auto provisioning service (GAPS) will auto assign any new AP to a group i
 * Create the container "docker build -t gaps:latest ."
 * Start the container "docker run -p 5000:5000 gaps"
 
-#This container is built with gunicorn/wsgi
+This container includes gunicorn web-server
+Modify the wsgi config as needed
+
+
+Question - Feel free to contact me:   
+#(c) 2021 Will Smith - WILL@WIFI-GUYS.COM
