@@ -15,13 +15,13 @@ Geo-IP auto provisioning service (GAPS) will auto assign any new AP to a group i
 
 # First Steps:
 
-* Log into Aruba Central from the Account Home page:
-  * API Gateway > System Apps & Tokens > Create a new key
-  * Webhooks > Click the + sign > Enter the URL where the GAPS service will be posted "https://<gaps-url>/webhook
-* Launch the Network Dashboard:
-   * Global > Alerts & Events > Config
-   * Under Access Point > Enable AP Detect > Select the Webhook for GAPS
-
+  1. Log into Aruba Central from the Account Home page:  
+     * API Gateway > System Apps & Tokens > Create a new key
+     * Webhooks > Click the + sign > Enter the URL where the GAPS service will be posted "https://your-server.com/webhook"
+  2. Launch the Network Dashboard:  
+     * Global > Alerts & Events > Config  
+     * Under Access Point > Enable AP Detect > Select the Webhook for GAPS
+ 
 # Install Instructions:
 
   1. Copy the files to host
