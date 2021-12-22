@@ -13,7 +13,7 @@ Geo-IP auto provisioning service (GAPS) will auto assign any new AP to a group i
 * The location data parsed for the two letter state. This is checked against a local dictionary that maps the state to a location (IE East / West). 
 * Based on the location, a group is selected and GAPS sends Central the AP provisioning command with the proper group.
 
-#Install instructions
+# Install instructions
 * Copy the files to host
 * Open dockerfile and add the Aruba Central Credentials
 
